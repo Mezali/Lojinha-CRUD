@@ -1,0 +1,26 @@
+services:
+  banco:
+    image: mariadb:latest
+    container_name: banco
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mariadb-data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: python
+      MARIADB_PASSWORD: python
+
+  pma:
+    image: phpmyadmin
+    container_name: pma
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOSTS: banco
+      PMA_PORTS: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+
+
